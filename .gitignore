@@ -1,0 +1,11 @@
+# Byte‑code & venvs
+__pycache__/
+*.py[cod]
+.venv/
+# macOS clutter
+.DS_Store
+# Big or secret things
+models/
+*.wav
+*.mp3
+.env
