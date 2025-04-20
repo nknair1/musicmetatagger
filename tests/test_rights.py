@@ -51,38 +51,50 @@ def patch_st_model(mocker):
     mock_cos_sim = mocker.patch('app.rights.util.cos_sim')
     yield mock_cos_sim # Provide the mock cos_sim to tests if they need it
 
-def test_check_lyric_similarity_match_found(patch_st_model):
+def test_check_lyric_similarity_match_found(patch_st_model): # Use the fixture
     """Test finding a similarity above the threshold."""
-    mock_cos_sim = patch_st_model # Get the mock from the fixture
-    # Simulate high similarity for the second corpus item
-    # Need to return a tensor-like structure for the code (shape [1, num_corpus_items])
-    # We return CPU numpy array as the .cpu() call is done inside rights.py now
-    mock_cos_sim.return_value = np.array([[0.2, 0.85, 0.3]]) # High score at index 1
+    mock_cos_sim = patch_st_model # Get the mock for util.cos_sim
 
-    # Reset call count for the mock model encode if needed (might accumulate across tests)
+    # --- Revised Mocking Strategy ---
+    # 1. Create the mock tensor object that has the .cpu() method configured
+    mock_tensor = MagicMock(name="MockTensor")
+    mock_tensor.cpu.return_value = np.array([0.2, 0.85, 0.3]) # High score at index 1
+
+    # 2. Make util.cos_sim return a mock sequence (list) containing mock_tensor
+    # This simulates the behavior of tensor slicing/indexing [0]
+    mock_cos_sim.return_value = [mock_tensor]
+    # --- End Revised Mocking Strategy ---
+
     mock_st_model.encode.reset_mock()
-
     result = rights.check_lyric_similarity(TEST_LYRICS, CORPUS_TEXTS)
 
     # Assertions
-    assert mock_st_model.encode.call_count == 2 # Called for input and corpus
+    assert mock_st_model.encode.call_count == 2
     mock_cos_sim.assert_called_once()
+    # Now assert that .cpu() was called on the mock_tensor we created
+    mock_tensor.cpu.assert_called_once()
     assert len(result) == 1
     assert result[0]["corpus_index"] == 1
-    assert result[0]["similarity_score"] == pytest.approx(0.85) # Use approx for float compare
+    assert result[0]["similarity_score"] == pytest.approx(0.85)
     assert result[0]["corpus_text_preview"].startswith("This text contains")
 
-def test_check_lyric_similarity_no_match(patch_st_model):
+def test_check_lyric_similarity_no_match(patch_st_model): # Use the fixture
     """Test when no similarities are above the threshold."""
     mock_cos_sim = patch_st_model
-    # Simulate all scores below threshold
-    mock_cos_sim.return_value = np.array([[0.2, 0.75, 0.3]]) # All scores <= 0.80
-    mock_st_model.encode.reset_mock()
 
+    # --- Revised Mocking Strategy ---
+    mock_tensor = MagicMock(name="MockTensor")
+    # All scores <= 0.80
+    mock_tensor.cpu.return_value = np.array([0.2, 0.75, 0.3])
+    mock_cos_sim.return_value = [mock_tensor]
+    # --- End Revised Mocking Strategy ---
+
+    mock_st_model.encode.reset_mock()
     result = rights.check_lyric_similarity(TEST_LYRICS, CORPUS_TEXTS)
 
     assert mock_st_model.encode.call_count == 2
     mock_cos_sim.assert_called_once()
+    mock_tensor.cpu.assert_called_once()
     assert len(result) == 0 # No matches expected
 
 def test_check_lyric_similarity_empty_lyrics(patch_st_model):
