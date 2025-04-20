@@ -11,7 +11,7 @@ def extract_features(audio_path: Path, sr: int = 22050) -> dict:
     key = librosa.hz_to_note(librosa.midi_to_hz(key_idx + 24))  # rough
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13).mean(axis=1)
     return {
-        "tempo_bpm": float(np.round(tempo, 2)),
+        "tempo_bpm": float(np.round(tempo[0], 2)),
         "key": key,
         "mfcc": mfcc.tolist(),
     }

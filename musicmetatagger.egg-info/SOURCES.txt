@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+app/__init__.py
+app/analyzer.py
+app/metadata.py
+app/rights.py
+app/tagger.py
+musicmetatagger.egg-info/PKG-INFO
+musicmetatagger.egg-info/SOURCES.txt
+musicmetatagger.egg-info/dependency_links.txt
+musicmetatagger.egg-info/top_level.txt
+tests/test_analyzer.py

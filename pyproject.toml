@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "musicmetatagger" # Lowercase name for packaging
+version = "0.1.0"
+requires-python = ">=3.10" # Or your minimum Python version
+# Add other optional metadata if you like:
+# authors = [
+#   { name="Your Name", email="your@email.com" },
+# ]
+# description = "AI-Powered Music Metadata Generation"
+
+[tool.setuptools.packages.find]
+# Tells setuptools to look for packages directly under the root directory
+# (specifically, it will find the 'app' directory because it has an __init__.py)
+where = ["."]
+# You could explicitly include 'app' like this too:
+# include = ["app*"]
+# exclude = ["tests*"] # Good practice to exclude tests from the installable package
