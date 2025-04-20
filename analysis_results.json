@@ -1,0 +1,57 @@
+{
+  "audio_features": {
+    "tempo_bpm": 117.45,
+    "estimated_key_root": "D",
+    "mfcc_mean": [
+      -663.9923706054688,
+      1.7757070064544678,
+      -37.85597610473633,
+      -10.243682861328125,
+      0.7870794534683228,
+      8.827173233032227,
+      -0.6849872469902039,
+      -0.17547713220119476,
+      1.5960052013397217,
+      1.6689683198928833,
+      -1.019295573234558,
+      -0.7186752557754517,
+      -3.8796796798706055
+    ],
+    "rms_mean": 0.011261073872447014,
+    "spectral_centroid_mean": 1056.565920443539,
+    "zcr_mean": 0.04962375079314721
+  },
+  "semantic_tags": {
+    "primary_genre": "Electronic",
+    "sub_genres": [
+      "Synthwave",
+      "Chillout"
+    ],
+    "mood_tags": [
+      "Energetic",
+      "Upbeat",
+      "Catchy"
+    ],
+    "instruments_likely": [
+      "Synthesizer",
+      "Drum Machine",
+      "Bass Guitar"
+    ]
+  },
+  "descriptive_metadata": {
+    "track_description": "Get ready to energize your day with this infectious Synthwave track! Catchy synthesizers and a driving drum machine beat create an upbeat atmosphere, perfect for high-intensity workouts or dancing the night away.",
+    "seo_keywords": [
+      "synthwave",
+      "electronic",
+      "upbeat",
+      "energetic",
+      "catchy",
+      "chillout",
+      "synthesizer",
+      "drum machine",
+      "bass guitar",
+      "danceable"
+    ]
+  },
+  "lyric_analysis": null
+}
