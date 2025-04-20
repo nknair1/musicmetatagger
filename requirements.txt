@@ -1,0 +1,12 @@
+flask==3.1.*
+librosa>=0.11
+torchaudio>=2.3          # M‑series wheels exist
+soundfile
+pydub
+pandas
+numpy
+scikit-learn
+sentence-transformers
+pytest
+python-dotenv
+ollama-python            # thin REST wrapper
