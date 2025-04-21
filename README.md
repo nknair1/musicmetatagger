@@ -1,4 +1,4 @@
-# AI-Powered Music Metadata Generation and Semantic Tagging Engine
+# AI-Powered Music Metadata Generation and Semantic Tagging Engine in Collaboration with LLMs
 
 ## Overview & Motivation
 
